@@ -4,6 +4,7 @@ plugins {
 }
 
 apply from: "../dependencies/compose.gradle"
+apply from: "../dependencies/koin.gradle"
 apply from: "../dependencies/navigationComponent.gradle"
 
 android {
