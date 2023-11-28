@@ -6,6 +6,8 @@ plugins {
 apply from: "../dependencies/compose.gradle"
 apply from: "../dependencies/koin.gradle"
 apply from: "../dependencies/navigationComponent.gradle"
+apply from: "../dependencies/fragmentTesting.gradle"
+apply from: "../dependencies/mockk.gradle"
 
 android {
     namespace 'com.realestate.propertyweb'
@@ -21,6 +23,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
+        }
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
         }
     }
 
