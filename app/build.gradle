@@ -4,10 +4,12 @@ plugins {
 }
 
 apply from: "../dependencies/compose.gradle"
+apply from: "../dependencies/coroutines.gradle"
 apply from: "../dependencies/koin.gradle"
 apply from: "../dependencies/navigationComponent.gradle"
 apply from: "../dependencies/fragmentTesting.gradle"
 apply from: "../dependencies/mockk.gradle"
+apply from: "../dependencies/kotest.gradle"
 
 android {
     namespace 'com.realestate.propertyweb'
@@ -65,6 +67,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.21"
 
     testImplementation 'junit:junit:4.13.2'
 
