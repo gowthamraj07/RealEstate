@@ -9,7 +9,7 @@ internal class ListViewModel: ViewModel() {
     val state: StateFlow<UIState> = _state
 
     fun onScreenLoaded() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     sealed interface UIState {

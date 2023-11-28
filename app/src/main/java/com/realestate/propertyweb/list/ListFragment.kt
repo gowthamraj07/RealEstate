@@ -4,19 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListFragment : Fragment() {
+internal class ListFragment : Fragment() {
 
     private val viewModel: ListViewModel by viewModel()
 
@@ -27,14 +21,8 @@ class ListFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = Color.White)
-                        .padding(16.dp)
-                ) {
-                    Text(text = "ListFragment")
-                }
+                val state: ListViewModel.UIState by viewModel.state.collectAsState()
+                PropertyListScreen(state)
             }
         }
     }
