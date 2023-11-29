@@ -31,6 +31,10 @@ internal fun PropertyListScreen(state: ListViewModel.UIState) {
             is ListViewModel.UIState.Error -> {
 
             }
+
+            is ListViewModel.UIState.Content -> {
+
+            }
         }
     }
 }

@@ -11,7 +11,10 @@ internal class ListViewModel(private val repository: PropertyRepository) : ViewM
 
     fun onScreenLoaded() {
         try {
-            repository.getProperties()
+            val properties = repository.getProperties()
+            _state.update {
+                UIState.Content(properties)
+            }
         } catch (exception: Exception) {
             _state.update {
                 UIState.Error(exception)
@@ -21,6 +24,7 @@ internal class ListViewModel(private val repository: PropertyRepository) : ViewM
 
     sealed interface UIState {
         data class Error(val exception: Exception) : UIState
+        data class Content(val properties: List<Property>) : UIState
 
         data object Loading: UIState
     }

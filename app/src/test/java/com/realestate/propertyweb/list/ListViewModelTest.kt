@@ -3,11 +3,16 @@ package com.realestate.propertyweb.list
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.property.Arb
+import io.kotest.property.RandomSource
+import io.kotest.property.arbitrary.arbitrary
+import io.kotest.property.arbitrary.int
+import io.kotest.property.arbitrary.string
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
 
-class ListViewModelTest: StringSpec({
+class ListViewModelTest : StringSpec({
     isolationMode = IsolationMode.InstancePerLeaf
 
 
@@ -32,4 +37,35 @@ class ListViewModelTest: StringSpec({
 
         viewModel.state.value shouldBe ListViewModel.UIState.Error(exception)
     }
+
+    "emit state as Content when repository returns list of properties" {
+        val properties = listOf(
+            Arb.property.gen()
+        )
+        coEvery { repository.getProperties() } returns properties
+
+        viewModel.onScreenLoaded()
+
+        viewModel.state.value shouldBe ListViewModel.UIState.Content(properties)
+    }
 })
+
+val Arb.Companion.property: Arb<Property>
+    get() = arbitrary {
+        Property(
+            bedrooms = Arb.int().gen(),
+            city = Arb.string().gen(),
+            id = Arb.int().gen(),
+            area = Arb.int().gen(),
+            url = Arb.string().gen(),
+            price = Arb.int().gen(),
+            professional = Arb.string().gen(),
+            propertyType = Arb.string().gen(),
+            offerType = Arb.int().gen(),
+            rooms = Arb.int().gen(),
+        )
+    }
+
+internal fun <T> Arb<T>.gen() : T {
+    return sample(RandomSource.default()).value
+}
