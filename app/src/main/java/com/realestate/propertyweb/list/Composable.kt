@@ -27,6 +27,10 @@ internal fun PropertyListScreen(state: ListViewModel.UIState) {
                     CircularProgressIndicator(modifier = Modifier.align(alignment = Alignment.Center))
                 }
             }
+
+            is ListViewModel.UIState.Error -> {
+
+            }
         }
     }
 }

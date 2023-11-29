@@ -3,6 +3,7 @@ package com.realestate.propertyweb.list
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
 
@@ -21,5 +22,14 @@ class ListViewModelTest: StringSpec({
         viewModel.onScreenLoaded()
 
         verify { repository.getProperties() }
+    }
+
+    "emit state as error when repository throws exception" {
+        val exception = Exception("Something went wrong")
+        coEvery { repository.getProperties() } throws exception
+
+        viewModel.onScreenLoaded()
+
+        viewModel.state.value shouldBe ListViewModel.UIState.Error(exception)
     }
 })
