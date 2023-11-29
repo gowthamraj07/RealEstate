@@ -4,12 +4,16 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-internal class ListViewModel: ViewModel() {
+internal class ListViewModel(private val repository: PropertyRepository) : ViewModel() {
     private val _state: MutableStateFlow<UIState> = MutableStateFlow(UIState.Loading)
     val state: StateFlow<UIState> = _state
 
     fun onScreenLoaded() {
-        //TODO("Not yet implemented")
+        try {
+            repository.getProperties()
+        } catch (e: Exception) {
+
+        }
     }
 
     sealed interface UIState {
