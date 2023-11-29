@@ -1,5 +1,7 @@
 package com.realestate.propertyweb.list
 
+import java.io.Serializable
+
 data class Property(
     val bedrooms: Int?,
     val city: String,
@@ -11,4 +13,4 @@ data class Property(
     val professional: String,
     val offerType: Int?,
     val rooms: Int?
-)
+): Serializable

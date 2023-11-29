@@ -16,7 +16,7 @@ class PropertyListScreenShotTest : ScreenshotTest {
     fun loadingState() {
         with(composeTestRule) {
             setContent {
-                PropertyListScreen(state = ListViewModel.UIState.Loading)
+                PropertyListScreen(state = ListViewModel.UIState.Loading){}
             }
 
             compareScreenshot(this)
@@ -27,7 +27,7 @@ class PropertyListScreenShotTest : ScreenshotTest {
     fun errorState() {
         with(composeTestRule) {
             setContent {
-                PropertyListScreen(state = ListViewModel.UIState.Error(Exception("Something went wrong")))
+                PropertyListScreen(state = ListViewModel.UIState.Error(Exception("Something went wrong"))){}
             }
 
             compareScreenshot(this)
@@ -55,7 +55,7 @@ class PropertyListScreenShotTest : ScreenshotTest {
                             )
                         )
                     )
-                )
+                ) {}
             }
 
             compareScreenshot(this)

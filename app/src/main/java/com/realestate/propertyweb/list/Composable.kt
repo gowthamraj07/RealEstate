@@ -1,6 +1,7 @@
 package com.realestate.propertyweb.list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,7 +26,10 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @Composable
-internal fun PropertyListScreen(state: ListViewModel.UIState) {
+internal fun PropertyListScreen(
+    state: ListViewModel.UIState,
+    onItemClickListener: (Property) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,31 +54,34 @@ internal fun PropertyListScreen(state: ListViewModel.UIState) {
             }
 
             is ListViewModel.UIState.Content -> {
-                PropertyList(properties = state.properties)
+                PropertyList(properties = state.properties, onItemClickListener)
             }
         }
     }
 }
 
 @Composable
-fun PropertyList(properties: List<Property>) {
+fun PropertyList(properties: List<Property>, onItemClickListener: (Property) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
         properties.forEach { property ->
-            PropertyItem(property = property)
+            PropertyItem(property = property, onItemClickListener)
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 @Composable
-fun PropertyItem(property: Property) {
+fun PropertyItem(property: Property, onItemClickListener: (Property) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onItemClickListener(property)
+            }
     ) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
             AsyncImage(
@@ -134,6 +141,7 @@ fun PropertyItemPreview() {
             propertyType = "House",
             offerType = 1,
             rooms = 5
-        )
+        ),
+        onItemClickListener = {}
     )
 }

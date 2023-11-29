@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.realestate.propertyweb.list.ListFragment"
-        android:label="ListFragment" />
+        android:label="ListFragment" >
+        <action
+            android:id="@+id/action_listFragment_to_propertyDetailsFragment"
+            app:destination="@id/propertyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/propertyDetailsFragment"
+        android:name="com.realestate.propertyweb.details.PropertyDetailsFragment"
+        android:label="PropertyDetailsFragment" >
+        <argument
+            android:name="property"
+            app:argType="com.realestate.propertyweb.list.Property" />
+    </fragment>
 </navigation>

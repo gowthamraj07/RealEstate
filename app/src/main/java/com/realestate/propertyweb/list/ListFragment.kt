@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class ListFragment : Fragment() {
@@ -22,7 +23,9 @@ internal class ListFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 val state: ListViewModel.UIState by viewModel.state.collectAsState()
-                PropertyListScreen(state)
+                PropertyListScreen(state = state, onItemClickListener = {
+                    findNavController().navigate(ListFragmentDirections.actionListFragmentToPropertyDetailsFragment(it))
+                })
             }
         }
     }
