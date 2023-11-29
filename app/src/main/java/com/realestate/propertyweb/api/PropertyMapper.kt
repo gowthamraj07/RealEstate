@@ -6,6 +6,11 @@ internal class PropertyMapper {
     fun map(propertyDtos: List<PropertyDto>): List<Property> {
 
         return propertyDtos.map {
+            requireNotNull(it.id) { "id is null" }
+            requireNotNull(it.city) { "city is null" }
+            requireNotNull(it.area) { "area is null" }
+            requireNotNull(it.price) { "price is null" }
+
             Property(
                 bedrooms = it.bedrooms!!,
                 city = it.city!!,

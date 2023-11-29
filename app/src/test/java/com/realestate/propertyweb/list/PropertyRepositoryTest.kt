@@ -63,7 +63,7 @@ class PropertyRepositoryTest: StringSpec({
     }
 })
 
-private val Arb.Companion.propertyDtoArb: Arb<PropertyDto>
+val Arb.Companion.propertyDtoArb: Arb<PropertyDto>
     get() = arbitrary {
         PropertyDto(
             bedrooms = Arb.int().gen(),
