@@ -1,5 +1,6 @@
 package com.realestate.propertyweb.list
 
+import app.cash.turbine.test
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -29,24 +30,30 @@ class ListViewModelTest : StringSpec({
         verify { repository.getProperties() }
     }
 
-    "emit state as error when repository throws exception" {
+    "emit state as loading followed by error when repository throws exception" {
         val exception = Exception("Something went wrong")
         coEvery { repository.getProperties() } throws exception
 
-        viewModel.onScreenLoaded()
+        viewModel.state.test {
+            viewModel.onScreenLoaded()
 
-        viewModel.state.value shouldBe ListViewModel.UIState.Error(exception)
+            awaitItem() shouldBe ListViewModel.UIState.Loading
+            awaitItem() shouldBe ListViewModel.UIState.Error(exception)
+        }
     }
 
-    "emit state as Content when repository returns list of properties" {
+    "emit state as loading followed by Content when repository returns list of properties" {
         val properties = listOf(
             Arb.property.gen()
         )
         coEvery { repository.getProperties() } returns properties
 
-        viewModel.onScreenLoaded()
+        viewModel.state.test {
+            viewModel.onScreenLoaded()
 
-        viewModel.state.value shouldBe ListViewModel.UIState.Content(properties)
+            awaitItem() shouldBe ListViewModel.UIState.Loading
+            awaitItem() shouldBe ListViewModel.UIState.Content(properties)
+        }
     }
 })
 
