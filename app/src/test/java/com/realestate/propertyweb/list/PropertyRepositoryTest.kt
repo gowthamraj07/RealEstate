@@ -50,6 +50,17 @@ class PropertyRepositoryTest: StringSpec({
 
         result shouldBe properties
     }
+
+    "throw exception when mapper throws exception" {
+        val propertyDtos = Arb.propertyDtoArb.genList()
+        every { api.getProperties() } returns propertyDtos
+        val exception = Exception("Something went wrong")
+        every { mapper.map(propertyDtos) } throws exception
+
+        val result = runCatching { repository.getProperties() }
+
+        result.exceptionOrNull() shouldBe exception
+    }
 })
 
 private val Arb.Companion.propertyDtoArb: Arb<PropertyDto>
