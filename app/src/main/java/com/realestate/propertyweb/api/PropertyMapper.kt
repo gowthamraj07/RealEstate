@@ -13,16 +13,16 @@ internal class PropertyMapper {
             requireNotNull(it.propertyType) { "propertyType is null" }
 
             Property(
-                bedrooms = it.bedrooms!!,
+                bedrooms = it.bedrooms,
                 city = it.city!!,
                 id = it.id!!,
                 area = it.area!!,
-                url = it.url!!,
+                url = it.url,
                 price = it.price!!,
-                professional = it.professional!!,
+                professional = it.professional,
                 propertyType = it.propertyType!!,
-                offerType = it.offerType!!,
-                rooms = it.rooms!!,
+                offerType = it.offerType,
+                rooms = it.rooms,
             )
         }
     }
