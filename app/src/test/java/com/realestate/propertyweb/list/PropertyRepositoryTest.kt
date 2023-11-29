@@ -4,6 +4,7 @@ import com.realestate.propertyweb.api.PropertyApi
 import com.realestate.propertyweb.api.PropertyDto
 import com.realestate.propertyweb.api.PropertyMapper
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.RandomSource
 import io.kotest.property.arbitrary.arbitrary
@@ -37,6 +38,17 @@ class PropertyRepositoryTest: StringSpec({
         verify {
             mapper.map(propertyDtos)
         }
+    }
+
+    "return property list returned by the mapper, when api call and mapping is successful" {
+        val propertyDtos = Arb.propertyDtoArb.genList()
+        every { api.getProperties() } returns propertyDtos
+        val properties = Arb.property.genList()
+        every { mapper.map(propertyDtos) } returns properties
+
+        val result = repository.getProperties()
+
+        result shouldBe properties
     }
 })
 
