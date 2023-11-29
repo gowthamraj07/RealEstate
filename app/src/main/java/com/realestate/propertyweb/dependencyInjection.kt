@@ -7,10 +7,18 @@ import com.realestate.propertyweb.list.PropertyRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module {
 
-    single { Retrofit.Builder().baseUrl("https://gsl-apps-technical-test.dignp.com/").build() }
+    single {
+        Retrofit
+            .Builder()
+            .baseUrl("https://gsl-apps-technical-test.dignp.com/")
+            .addConverterFactory(
+                GsonConverterFactory.create()
+            ).build()
+    }
     factory { get<Retrofit>().create(PropertyApi::class.java) }
     factory { PropertyMapper() }
     factory { PropertyRepository(get(), get()) }

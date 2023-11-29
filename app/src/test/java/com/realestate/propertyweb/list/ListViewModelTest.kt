@@ -10,15 +10,27 @@ import io.kotest.property.arbitrary.arbitrary
 import io.kotest.property.arbitrary.int
 import io.kotest.property.arbitrary.string
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 
 class ListViewModelTest : StringSpec({
     isolationMode = IsolationMode.InstancePerLeaf
-
+    coroutineTestScope = true
 
     val repository = mockk<PropertyRepository>(relaxed = true)
     val viewModel = ListViewModel(repository)
+
+    beforeTest {
+        Dispatchers.setMain(UnconfinedTestDispatcher())
+    }
+
+    afterTest {
+        Dispatchers.resetMain()
+    }
 
     "should emit Loading state on view model initialization" {
         viewModel.state.value shouldBe ListViewModel.UIState.Loading
@@ -27,7 +39,7 @@ class ListViewModelTest : StringSpec({
     "trigger repository to get list of properties on screen loaded" {
         viewModel.onScreenLoaded()
 
-        verify { repository.getProperties() }
+        coVerify { repository.getProperties() }
     }
 
     "emit state as loading followed by error when repository throws exception" {
@@ -73,6 +85,6 @@ val Arb.Companion.property: Arb<Property>
         )
     }
 
-internal fun <T> Arb<T>.gen() : T {
+internal fun <T> Arb<T>.gen(): T {
     return sample(RandomSource.default()).value
 }

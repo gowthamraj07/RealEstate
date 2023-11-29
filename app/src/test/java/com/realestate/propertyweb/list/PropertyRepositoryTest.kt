@@ -11,6 +11,8 @@ import io.kotest.property.RandomSource
 import io.kotest.property.arbitrary.arbitrary
 import io.kotest.property.arbitrary.int
 import io.kotest.property.arbitrary.string
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -25,14 +27,14 @@ class PropertyRepositoryTest: StringSpec({
     "trigger api call to get list of properties" {
         repository.getProperties()
 
-        verify {
+        coVerify {
             api.getProperties()
         }
     }
 
     "pass property list to mapper when api call is successful" {
         val propertiesDto = Arb.propertiesDtoArb.gen()
-        every { api.getProperties() } returns propertiesDto
+        coEvery { api.getProperties() } returns propertiesDto
 
         repository.getProperties()
 
@@ -43,7 +45,7 @@ class PropertyRepositoryTest: StringSpec({
 
     "return property list returned by the mapper, when api call and mapping is successful" {
         val propertiesDto = Arb.propertiesDtoArb.gen()
-        every { api.getProperties() } returns propertiesDto
+        coEvery { api.getProperties() } returns propertiesDto
         val properties = Arb.property.genList()
         every { mapper.map(propertiesDto) } returns properties
 
@@ -54,7 +56,7 @@ class PropertyRepositoryTest: StringSpec({
 
     "throw exception when mapper throws exception" {
         val propertiesDto = Arb.propertiesDtoArb.gen()
-        every { api.getProperties() } returns propertiesDto
+        coEvery { api.getProperties() } returns propertiesDto
         val exception = Exception("Something went wrong")
         every { mapper.map(propertiesDto) } throws exception
 
