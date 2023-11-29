@@ -31,16 +31,16 @@ class PropertyMapperTest : StringSpec({
 
         result shouldBe listOf(
             Property(
-                bedrooms = propertyDto.bedrooms!!,
                 city = propertyDto.city!!,
                 id = propertyDto.id!!,
                 area = propertyDto.area!!,
-                url = propertyDto.url!!,
                 price = propertyDto.price!!,
-                professional = propertyDto.professional!!,
-                propertyType = propertyDto.propertyType!!,
-                offerType = propertyDto.offerType!!,
-                rooms = propertyDto.rooms!!,
+                bedrooms = propertyDto.bedrooms,
+                url = propertyDto.url,
+                professional = propertyDto.professional,
+                propertyType = propertyDto.propertyType,
+                offerType = propertyDto.offerType,
+                rooms = propertyDto.rooms,
             )
         )
     }
