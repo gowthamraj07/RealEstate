@@ -5,6 +5,6 @@ import retrofit2.http.GET
 interface PropertyApi {
 
     @GET("listings.json")
-    fun getProperties(): PropertyDto
+    fun getProperties(): PropertiesDto
 
 }

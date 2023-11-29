@@ -1,8 +1,8 @@
 package com.realestate.propertyweb.list
 
 import com.realestate.propertyweb.api.Item
+import com.realestate.propertyweb.api.PropertiesDto
 import com.realestate.propertyweb.api.PropertyApi
-import com.realestate.propertyweb.api.PropertyDto
 import com.realestate.propertyweb.api.PropertyMapper
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -31,21 +31,21 @@ class PropertyRepositoryTest: StringSpec({
     }
 
     "pass property list to mapper when api call is successful" {
-        val propertyDtos = Arb.propertyDtoArb.gen()
-        every { api.getProperties() } returns propertyDtos
+        val propertiesDto = Arb.propertiesDtoArb.gen()
+        every { api.getProperties() } returns propertiesDto
 
         repository.getProperties()
 
         verify {
-            mapper.map(propertyDtos)
+            mapper.map(propertiesDto)
         }
     }
 
     "return property list returned by the mapper, when api call and mapping is successful" {
-        val propertyDtos = Arb.propertyDtoArb.gen()
-        every { api.getProperties() } returns propertyDtos
+        val propertiesDto = Arb.propertiesDtoArb.gen()
+        every { api.getProperties() } returns propertiesDto
         val properties = Arb.property.genList()
-        every { mapper.map(propertyDtos) } returns properties
+        every { mapper.map(propertiesDto) } returns properties
 
         val result = repository.getProperties()
 
@@ -53,10 +53,10 @@ class PropertyRepositoryTest: StringSpec({
     }
 
     "throw exception when mapper throws exception" {
-        val propertyDtos = Arb.propertyDtoArb.gen()
-        every { api.getProperties() } returns propertyDtos
+        val propertiesDto = Arb.propertiesDtoArb.gen()
+        every { api.getProperties() } returns propertiesDto
         val exception = Exception("Something went wrong")
-        every { mapper.map(propertyDtos) } throws exception
+        every { mapper.map(propertiesDto) } throws exception
 
         val result = runCatching { repository.getProperties() }
 
@@ -64,10 +64,10 @@ class PropertyRepositoryTest: StringSpec({
     }
 })
 
-val Arb.Companion.propertyDtoArb: Arb<PropertyDto>
+val Arb.Companion.propertiesDtoArb: Arb<PropertiesDto>
     get() = arbitrary {
         val items = propertyItemDtoArb.genList()
-        PropertyDto(
+        PropertiesDto(
             items = items,
             totalCount = items.size
         )

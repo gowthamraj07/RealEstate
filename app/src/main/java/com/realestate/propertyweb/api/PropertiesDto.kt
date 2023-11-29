@@ -2,7 +2,7 @@ package com.realestate.propertyweb.api
 
 import com.google.gson.annotations.SerializedName
 
-data class PropertyDto(
+data class PropertiesDto(
     @SerializedName("items") var items: List<Item> = arrayListOf(),
     @SerializedName("totalCount") var totalCount: Int? = null
 )
