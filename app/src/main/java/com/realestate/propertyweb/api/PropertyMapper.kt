@@ -3,9 +3,9 @@ package com.realestate.propertyweb.api
 import com.realestate.propertyweb.list.Property
 
 internal class PropertyMapper {
-    fun map(propertyDtos: List<PropertyDto>): List<Property> {
+    fun map(propertyDtos: PropertyDto): List<Property> {
 
-        return propertyDtos.map {
+        return propertyDtos.items.map {
             requireNotNull(it.id) { "id is null" }
             requireNotNull(it.city) { "city is null" }
             requireNotNull(it.area) { "area is null" }

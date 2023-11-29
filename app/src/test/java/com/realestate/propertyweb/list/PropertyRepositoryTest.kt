@@ -1,5 +1,6 @@
 package com.realestate.propertyweb.list
 
+import com.realestate.propertyweb.api.Item
 import com.realestate.propertyweb.api.PropertyApi
 import com.realestate.propertyweb.api.PropertyDto
 import com.realestate.propertyweb.api.PropertyMapper
@@ -30,7 +31,7 @@ class PropertyRepositoryTest: StringSpec({
     }
 
     "pass property list to mapper when api call is successful" {
-        val propertyDtos = Arb.propertyDtoArb.genList()
+        val propertyDtos = Arb.propertyDtoArb.gen()
         every { api.getProperties() } returns propertyDtos
 
         repository.getProperties()
@@ -41,7 +42,7 @@ class PropertyRepositoryTest: StringSpec({
     }
 
     "return property list returned by the mapper, when api call and mapping is successful" {
-        val propertyDtos = Arb.propertyDtoArb.genList()
+        val propertyDtos = Arb.propertyDtoArb.gen()
         every { api.getProperties() } returns propertyDtos
         val properties = Arb.property.genList()
         every { mapper.map(propertyDtos) } returns properties
@@ -52,7 +53,7 @@ class PropertyRepositoryTest: StringSpec({
     }
 
     "throw exception when mapper throws exception" {
-        val propertyDtos = Arb.propertyDtoArb.genList()
+        val propertyDtos = Arb.propertyDtoArb.gen()
         every { api.getProperties() } returns propertyDtos
         val exception = Exception("Something went wrong")
         every { mapper.map(propertyDtos) } throws exception
@@ -65,17 +66,26 @@ class PropertyRepositoryTest: StringSpec({
 
 val Arb.Companion.propertyDtoArb: Arb<PropertyDto>
     get() = arbitrary {
+        val items = propertyItemDtoArb.genList()
         PropertyDto(
+            items = items,
+            totalCount = items.size
+        )
+    }
+
+val Arb.Companion.propertyItemDtoArb: Arb<Item>
+    get() = arbitrary {
+        Item(
             bedrooms = Arb.int().gen(),
-                    city = Arb.string().gen(),
-                    id = Arb.int().gen(),
-                    area = Arb.int().gen(),
-                    url = Arb.string().gen(),
-                    price = Arb.int().gen(),
-                    professional = Arb.string().gen(),
-                    propertyType = Arb.string().gen(),
-                    offerType = Arb.int().gen(),
-                    rooms = Arb.int().gen(),
+            city = Arb.string().gen(),
+            id = Arb.int().gen(),
+            area = Arb.int().gen(),
+            url = Arb.string().gen(),
+            price = Arb.int().gen(),
+            professional = Arb.string().gen(),
+            propertyType = Arb.string().gen(),
+            offerType = Arb.int().gen(),
+            rooms = Arb.int().gen(),
         )
     }
 
