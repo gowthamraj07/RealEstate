@@ -1,8 +1,10 @@
 package com.realestate.propertyweb.list
 
-internal class PropertyRepository {
+import com.realestate.propertyweb.api.PropertyApi
+
+internal class PropertyRepository(private val api: PropertyApi) {
     fun getProperties(): List<Property> {
-        //TODO("Not yet implemented")
+        api.getProperties()
         return emptyList()
     }
 
