@@ -5,10 +5,10 @@ data class Property(
     val city: String,
     val id: Int,
     val area: Int,
+    val propertyType: String,
     val url: String?,
     val price: Int,
     val professional: String?,
-    val propertyType: String?,
     val offerType: Int?,
     val rooms: Int?
 )

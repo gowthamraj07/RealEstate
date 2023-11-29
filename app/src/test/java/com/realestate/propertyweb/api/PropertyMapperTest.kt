@@ -35,10 +35,10 @@ class PropertyMapperTest : StringSpec({
                 id = propertyDto.id!!,
                 area = propertyDto.area!!,
                 price = propertyDto.price!!,
+                propertyType = propertyDto.propertyType!!,
                 bedrooms = propertyDto.bedrooms,
                 url = propertyDto.url,
                 professional = propertyDto.professional,
-                propertyType = propertyDto.propertyType,
                 offerType = propertyDto.offerType,
                 rooms = propertyDto.rooms,
             )
@@ -75,5 +75,13 @@ class PropertyMapperTest : StringSpec({
         val result = runCatching { mapper.map(listOf(propertyDto)) }
 
         result.exceptionOrNull() shouldBe IllegalArgumentException("price is null")
+    }
+
+    "throw exception when propertyType is null" {
+        val propertyDto = Arb.propertyDtoArb.gen().copy(propertyType = null)
+
+        val result = runCatching { mapper.map(listOf(propertyDto)) }
+
+        result.exceptionOrNull() shouldBe IllegalArgumentException("propertyType is null")
     }
 })
