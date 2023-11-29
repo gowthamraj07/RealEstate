@@ -22,4 +22,16 @@ class PropertyListScreenShotTest: ScreenshotTest {
             compareScreenshot(this)
         }
     }
+
+    @Test
+    fun errorState() {
+        with(composeTestRule) {
+            setContent {
+                PropertyListScreen(state = ListViewModel.UIState.Error(Exception("Something went wrong")))
+            }
+
+            compareScreenshot(this)
+        }
+    }
+
 }
