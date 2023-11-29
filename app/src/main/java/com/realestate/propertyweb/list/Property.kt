@@ -8,7 +8,7 @@ data class Property(
     val propertyType: String,
     val url: String?,
     val price: Int,
-    val professional: String?,
+    val professional: String,
     val offerType: Int?,
     val rooms: Int?
 )

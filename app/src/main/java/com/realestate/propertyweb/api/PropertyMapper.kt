@@ -11,6 +11,7 @@ internal class PropertyMapper {
             requireNotNull(it.area) { "area is null" }
             requireNotNull(it.price) { "price is null" }
             requireNotNull(it.propertyType) { "propertyType is null" }
+            requireNotNull(it.professional) { "professional is null" }
 
             Property(
                 bedrooms = it.bedrooms,
@@ -19,7 +20,7 @@ internal class PropertyMapper {
                 area = it.area!!,
                 url = it.url,
                 price = it.price!!,
-                professional = it.professional,
+                professional = it.professional!!,
                 propertyType = it.propertyType!!,
                 offerType = it.offerType,
                 rooms = it.rooms,
