@@ -79,6 +79,15 @@ class PropertyMapperTest : StringSpec({
         result.exceptionOrNull() shouldBe IllegalArgumentException("propertyType is null")
     }
 
+    "throw exception when professional is null" {
+        val propertyItemDto = Arb.propertyItemDtoArb.gen().copy(professional = null)
+        val propertiesDto = Arb.propertiesDtoArb.gen().copy(items = listOf(propertyItemDto), totalCount = 1)
+
+        val result = runCatching { mapper.map(propertiesDto) }
+
+        result.exceptionOrNull() shouldBe IllegalArgumentException("professional is null")
+    }
+
     "use fallback image when url is null" {
         val propertyItemDto = Arb.propertyItemDtoArb.gen().copy(url = null)
         val propertiesDto = Arb.propertiesDtoArb.gen().copy(items = listOf(propertyItemDto), totalCount = 1)
