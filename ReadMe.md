@@ -62,4 +62,4 @@ The main objective of this app is to demonstrate the use of the following:
 ### Screenshots
 | Listing page | Details page|
 |--------------| -------------|
-|![listing_page.png](app%2Fscreenshots%2Fcaptured%2Flisting_page.png)|![details_page.png](app%2Fscreenshots%2Fcaptured%2Fdetails_page.png)|
+|![listing_page.png](app%2Fscreenshots%2Fcaptured%2Flisting_page.png)|![details_screen.png](app%2Fscreenshots%2Fcaptured%2Fdetails_screen.png)|
