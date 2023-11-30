@@ -18,7 +18,7 @@ internal class PropertyMapper {
                 city = it.city!!,
                 id = it.id!!,
                 area = it.area!!,
-                url = it.url,
+                url = it.url ?: "https://img.icons8.com/ios-filled/50/no-image.png",
                 price = it.price!!,
                 professional = it.professional!!,
                 propertyType = it.propertyType!!,

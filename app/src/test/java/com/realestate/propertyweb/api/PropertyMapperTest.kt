@@ -27,7 +27,7 @@ class PropertyMapperTest : StringSpec({
                 propertyType = propertyItemDto.propertyType!!,
                 bedrooms = propertyItemDto.bedrooms,
                 url = propertyItemDto.url,
-                professional = propertyItemDto.professional,
+                professional = propertyItemDto.professional!!,
                 offerType = propertyItemDto.offerType,
                 rooms = propertyItemDto.rooms,
             )
@@ -77,5 +77,27 @@ class PropertyMapperTest : StringSpec({
         val result = runCatching { mapper.map(propertiesDto) }
 
         result.exceptionOrNull() shouldBe IllegalArgumentException("propertyType is null")
+    }
+
+    "use fallback image when url is null" {
+        val propertyItemDto = Arb.propertyItemDtoArb.gen().copy(url = null)
+        val propertiesDto = Arb.propertiesDtoArb.gen().copy(items = listOf(propertyItemDto), totalCount = 1)
+
+        val result = mapper.map(propertiesDto)
+
+        result shouldBe listOf(
+            Property(
+                city = propertyItemDto.city!!,
+                id = propertyItemDto.id!!,
+                area = propertyItemDto.area!!,
+                price = propertyItemDto.price!!,
+                propertyType = propertyItemDto.propertyType!!,
+                bedrooms = propertyItemDto.bedrooms,
+                url = "https://img.icons8.com/ios-filled/50/no-image.png",
+                professional = propertyItemDto.professional!!,
+                offerType = propertyItemDto.offerType,
+                rooms = propertyItemDto.rooms,
+            )
+        )
     }
 })
