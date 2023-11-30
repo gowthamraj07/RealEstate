@@ -1,4 +1,4 @@
-This is a sample app to simulate the RealEstate listing and details page.
+This is a simple app to simulate the RealEstate property listing and details page.
 
 ### Objective
 The main objective of this app is to demonstrate the use of the following:
@@ -24,20 +24,20 @@ The main objective of this app is to demonstrate the use of the following:
 - I followed Test Driven Development (TDD) approach for development.
 
 ### App Features
-- Listing page
-  - Display list of real estate properties
-- Details page
-  - Display details of the selected property
+- Listing Property page
+  - Display the list of real estate properties
+- Property details page
+  - Display the details of the selected property
 
-### Observations
-- There are 2 services provided by the API:
-  - Listing service
+### Observations / Assumptions (based on my self-refinement)
+- There were 2 web services given in the requirement:
+  - Property listing service
     - https://gsl-apps-technical-test.dignp.com/listings.json
-  - Details service
+  - Property details service
     - https://gsl-apps-technical-test.dignp.com/listings/{id}.json
-- The response of second service is already covered in the first service. So, I have used the first service only.
-- Few of the properties are present in one property that are not present in other properties. So, I ignored some of the properties that doesn't exist in all the properties.
-- The property "offerType" looks like a enum, and the explanation of the enum is not provided. So, I ignored the property.
+- The response of Property details service was already covered in the Property listing service. So, I have used the listing service only to develop both the screens.
+- Though the input json has different sets of attributes for each property, So, I have incorporated the same in the UI screen except the attribute "URL" as I have used some random images from internet for URl.
+- The attribute "offerType" looks like an enum, and the explanation of the enum [ENUM value] is not provided. So, I have ignored that attribute to display.
 
 ### Note
 - Since the main focus is on the usage of Kotlin, the UI and error scenarios are handled with limited scope.
@@ -60,6 +60,6 @@ The main objective of this app is to demonstrate the use of the following:
     - https://plugins.jetbrains.com/plugin/14080-kotest
 
 ### Screenshots
-| Listing page | Details page|
-|--------------| -------------|
-|![listing_page.png](app%2Fscreenshots%2Fcaptured%2Flisting_page.png)|![details_screen.png](app%2Fscreenshots%2Fcaptured%2Fdetails_screen.png)|
+| Property listing page                                                | Property details page                                                    |
+|----------------------------------------------------------------------|--------------------------------------------------------------------------|
+| ![listing_page.png](app%2Fscreenshots%2Fcaptured%2Flisting_page.png) | ![details_screen.png](app%2Fscreenshots%2Fcaptured%2Fdetails_screen.png) |
