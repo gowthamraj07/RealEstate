@@ -9,6 +9,7 @@ import org.junit.Rule
 import org.junit.Test
 
 // ./gradlew executeScreenshotTests -Pandroid.testInstrumentationRunnerArguments.class=com.realestate.propertyweb.details.PropertyDetailsScreenshotTest -Precord
+// ./gradlew executeScreenshotTests -Pandroid.testInstrumentationRunnerArguments.class=com.realestate.propertyweb.details.PropertyDetailsScreenshotTest
 class PropertyDetailsScreenshotTest : ScreenshotTest {
 
     @get:Rule

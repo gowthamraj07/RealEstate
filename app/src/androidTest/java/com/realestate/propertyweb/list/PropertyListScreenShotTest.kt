@@ -7,6 +7,7 @@ import org.junit.Test
 
 
 // ./gradlew executeScreenshotTests -Pandroid.testInstrumentationRunnerArguments.class=com.realestate.propertyweb.list.PropertyListScreenShotTest -Precord
+// ./gradlew executeScreenshotTests -Pandroid.testInstrumentationRunnerArguments.class=com.realestate.propertyweb.list.PropertyListScreenShotTest
 class PropertyListScreenShotTest : ScreenshotTest {
 
     @get:Rule
