@@ -2,7 +2,7 @@ package com.realestate.propertyweb.details
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.karumi.shot.ScreenshotTest
-import com.realestate.propertyweb.list.Property
+import com.realestate.propertyweb.domain.Property
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule

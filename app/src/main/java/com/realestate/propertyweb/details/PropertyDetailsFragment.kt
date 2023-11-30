@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.realestate.propertyweb.list.Property
+import com.realestate.propertyweb.domain.Property
 
 class PropertyDetailsFragment : Fragment() {
 

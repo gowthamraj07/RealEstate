@@ -1,4 +1,4 @@
-package com.realestate.propertyweb.list
+package com.realestate.propertyweb.domain
 
 import java.io.Serializable
 

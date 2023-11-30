@@ -1,6 +1,7 @@
 package com.realestate.propertyweb.list
 
 import app.cash.turbine.test
+import com.realestate.propertyweb.domain.Property
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

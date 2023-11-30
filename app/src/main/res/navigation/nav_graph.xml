@@ -18,6 +18,6 @@
         android:label="Property Details" >
         <argument
             android:name="property"
-            app:argType="com.realestate.propertyweb.list.Property" />
+            app:argType="com.realestate.propertyweb.domain.Property" />
     </fragment>
 </navigation>

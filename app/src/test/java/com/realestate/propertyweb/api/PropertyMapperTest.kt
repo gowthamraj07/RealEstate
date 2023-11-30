@@ -1,6 +1,6 @@
 package com.realestate.propertyweb.api
 
-import com.realestate.propertyweb.list.Property
+import com.realestate.propertyweb.domain.Property
 import com.realestate.propertyweb.list.gen
 import com.realestate.propertyweb.list.propertiesDtoArb
 import com.realestate.propertyweb.list.propertyItemDtoArb

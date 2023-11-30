@@ -2,6 +2,7 @@ package com.realestate.propertyweb.list
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.karumi.shot.ScreenshotTest
+import com.realestate.propertyweb.domain.Property
 import org.junit.Rule
 import org.junit.Test
 

@@ -10,6 +10,7 @@ import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.realestate.propertyweb.R
+import com.realestate.propertyweb.domain.Property
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

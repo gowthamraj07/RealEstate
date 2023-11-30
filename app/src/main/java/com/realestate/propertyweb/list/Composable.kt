@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.realestate.propertyweb.domain.Property
 
 @Composable
 internal fun PropertyListScreen(

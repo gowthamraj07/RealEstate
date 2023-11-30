@@ -1,6 +1,6 @@
 package com.realestate.propertyweb.api
 
-import com.realestate.propertyweb.list.Property
+import com.realestate.propertyweb.domain.Property
 
 internal class PropertyMapper {
     fun map(propertiesDtos: PropertiesDto): List<Property> {
