@@ -61,7 +61,8 @@ class ListFragmentTest : KoinTest {
     }
 
     @Test
-    fun shouldTriggerViewModelMethod_OnPropertyItemIsSelected() {
+    fun shouldNavigateToPropertyDetailsFragmentWithSelectedProperty_WhenPropertyItemIsSelected() {
+        // Arrange
         val property = Property(
             bedrooms = 4,
             city = "Brussels",
@@ -80,12 +81,17 @@ class ListFragmentTest : KoinTest {
         val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
         setupPropertiesListFragmentWith(navController)
 
+        // Act
         with(composeTestRule) {
             onNodeWithText("John Doe").performClick()
         }
 
+        // Assert
         navController.currentDestination?.id.let {
             assert(it == R.id.propertyDetailsFragment)
+        }
+        navController.backStack.last().arguments?.get("property").let {
+            assert(it == property)
         }
     }
 
